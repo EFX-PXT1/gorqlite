@@ -442,6 +442,8 @@ func (qr *QueryResult) Scan(dest ...interface{}) error {
 			switch src := src.(type) {
 			case string:
 				*d.(*string) = src
+			case float64:
+				*d.(*string) = strconv.FormatFloat(float64(src), 'f', -1, 64)
 			default:
 				return fmt.Errorf("invalid string col:%d type:%T val:%v", n, src, src)
 			}
